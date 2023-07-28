@@ -99,15 +99,21 @@ exports.addCommentReply = asyncHandler(async (req, res) => {
 })
 exports.deleteCommentReply = asyncHandler(async (req, res) => {
     const signedUser = req.user;
-    const { pid, commentId,replyId } = req.query;
+    const { pid, commentId, replyId } = req.query;
 
     const post = await Post.findOne({ _id: pid })
 
     const doesCommentExists = post.comments.findIndex(comment => comment.id === commentId);
 
-    if (!post.comments[doesCommentExists].user === signedUser._id) return sendErrorResponse({ res, statusCode: 403 })
-
     if (doesCommentExists === -1) return sendErrorResponse({ res, statusCode: 404 })
+
+    const doesReplyExists = post.comments[doesCommentExists].commentReplies.findIndex(reply => reply.id === replyId)
+
+    if (doesReplyExists === -1) return sendErrorResponse({ res, statusCode: 404 })
+
+    if (!post.comments[doesCommentExists].commentReplies[doesReplyExists].user === signedUser._id) return sendErrorResponse({ res, statusCode: 403 })
+
+    
 
     post.comments[doesCommentExists]
 
