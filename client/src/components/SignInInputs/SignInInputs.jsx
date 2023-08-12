@@ -8,17 +8,13 @@ import {
 } from "@chakra-ui/react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { signInKey, signedUserKey } from "../../react-query";
 import { setSignedUserSelector, setTokenSelector, useAuthStore } from "../../app/store";
 import { signIn } from "../../services/auth.service";
 import { getSignedUser } from "../../services/user.service";
 
 const SignInInputs = () => {
-	// TODO: change this useState to useRef
-	// const [usernameOrEmail, setUsernameOrEmail] = useState("");
-	// const [password, setPassword] = useState("");
-	// const [isShowPassword, setIsShowPassword] = useState(false);
 	const usernameOrEmail = useRef();
 	const password = useRef();
 	const isShowPassword = useRef(false);
@@ -29,21 +25,24 @@ const SignInInputs = () => {
 		mutationKey: [signInKey],
 		mutationFn: (body) => signIn(body),
 		onSuccess: (data) => {
-			console.log("SignInInputs.jsx:28", data);
 			setToken(data.token);
 		},
 	});
 
-	const { isFetching: signedUserLoading } = useQuery({
+	const { isFetching: signedUserLoading,isSuccess:getSignedUserSuccess } = useQuery({
 		queryKey: [signedUserKey],
 		queryFn: () => getSignedUser(),
 		onSuccess: (data) => {
-			console.log("SignInInputs.jsx:39", data);
 			setSignedUser(data.user);
-			navigate("/", { replace: true });
 		},
-		enabled: Boolean(isSuccess) && Boolean(status === "success")
+		enabled:isSuccess
 	});
+
+	if(getSignedUserSuccess){
+		return (
+			<Navigate to="/" />
+		)
+	}
 
 	const navigate = useNavigate();
 
@@ -68,9 +67,6 @@ const SignInInputs = () => {
 				marginY="1"
 				marginTop="7"
 				ref={usernameOrEmail}
-				// onChange={handleUsernameOrEmailChange}
-				// name="usernameOrEmail"
-				// value={usernameOrEmail}
 			/>
 			<InputGroup size="md">
 				<Input
@@ -81,9 +77,6 @@ const SignInInputs = () => {
 					_placeholder={{ fontSize: "12" }}
 					marginY="1"
 					ref={password}
-					// onChange={handlePasswordChange}
-					// name="password"
-					// value={password}
 				/>
 				<InputRightElement>
 					<Button

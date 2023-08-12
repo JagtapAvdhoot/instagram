@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import React, { memo, useEffect, useRef, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 import { setSignedUserSelector, setTokenSelector, useAuthStore } from "../../app/store";
 import { signUp } from "../../services/auth.service";
@@ -35,15 +35,20 @@ const SignUpInputs = ({ children }) => {
 
 	const navigate = useNavigate();
 
-	const {isFetching:signedUserLoading} = useQuery({
+	const {isFetching:signedUserLoading,isSuccess:getSignedUserSuccess} = useQuery({
 		queryKey: [signedUserKey],
 		queryFn: () => getSignedUser(),
 		onSuccess: (data) => {
 			setSignedUser(data.user);
-			navigate("/", { replace: true });
 		},
-		enabled: isSuccess
+		enabled:isSuccess
 	});
+
+	if(getSignedUserSuccess) {
+		return (
+			<Navigate to='/' />
+		)
+	}
 
 	const handleIsShowPasswordChange = (event) => {
 		isShowPassword.current = !isShowPassword;
