@@ -5,32 +5,32 @@ import { AiFillFacebook } from "react-icons/ai";
 import SignInInputs from "../../components/SignInInputs/SignInInputs";
 
 const SignIn = () => {
-  return (
-    <>
-      <SignInInputs />
+	return (
+		<>
+			<SignInInputs />
 
-      <Flex marginY="5" alignItems="center">
-        <Divider bgColor="cyan" />
-        <Text fontSize="sm">OR</Text>
-        <Divider bgColor="cyan" />
-      </Flex>
+			<Flex marginY="5" alignItems="center">
+				<Divider bgColor="cyan" />
+				<Text fontSize="sm">OR</Text>
+				<Divider bgColor="cyan" />
+			</Flex>
 
-      <Button
-        variant="ghost"
-        fontSize="15"
-        color="blue.700"
-        width="full"
-        _hover={{ background: "none" }}
-        leftIcon={<AiFillFacebook />}
-      >
+			<Button
+				variant="ghost"
+				fontSize="15"
+				color="blue.700"
+				width="full"
+				_hover={{ background: "none" }}
+				leftIcon={<AiFillFacebook />}
+			>
         Login with facebook
-      </Button>
+			</Button>
 
-      <Link href="#" fontSize="11" marginY="2">
+			<Link href="#" fontSize="11" marginY="2">
         Forgotten your password?
-      </Link>
-    </>
-  );
+			</Link>
+		</>
+	);
 };
 
 export default memo(SignIn);

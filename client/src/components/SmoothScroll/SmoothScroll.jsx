@@ -1,33 +1,33 @@
-import { useEffect, useRef } from 'react'
-import LocomotiveScroll from 'locomotive-scroll';
+import { useEffect, useRef } from "react";
+import LocomotiveScroll from "locomotive-scroll";
 
 const SmoothScroll = ({ children }) => {
-    const scrollref = useRef(null)
+	const scrollref = useRef(null);
 
-    useEffect(() => {
-        if (scrollref) return;
+	useEffect(() => {
+		if (scrollref) return;
 
-        const scroll = new LocomotiveScroll({
-            el: scrollref.current,
-            smooth: true,
-        });
+		const scroll = new LocomotiveScroll({
+			el: scrollref.current,
+			smooth: true,
+		});
 
-        scroll.init()
+		scroll.init();
 
-        return () => scroll.destroy()
-    }, [scrollref])
+		return () => scroll.destroy();
+	}, [scrollref]);
 
-    return (
-        <>
-            <div
-                data-scroll-container
-                ref={scrollref}
-            >
-                {children}
-            </div>
+	return (
+		<>
+			<div
+				data-scroll-container
+				ref={scrollref}
+			>
+				{children}
+			</div>
 
-        </>
-    )
-}
+		</>
+	);
+};
 
-export default SmoothScroll
+export default SmoothScroll;

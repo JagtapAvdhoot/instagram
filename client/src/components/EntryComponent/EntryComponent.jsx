@@ -14,72 +14,72 @@ const NotFound = lazy(() => import("../../pages/NotFound/NotFound"));
 const PageLayoutProvider = lazy(() => import("../../contexts/PageLayoutContext"));
 
 const EntryComponent = () => {
-  const location = useLocation();
+	const location = useLocation();
 
-  return (
-    <>
-      <PageLayoutProvider>
-        {location.pathname !== "/authentication" && <Sidebar />}
-        <Routes>
-          <Route path="/authentication" element={
-            <Suspense fallback={
-              <Box bg="main" width="-webkit-fill-available" height="-webkit-fill-available">
-                <Spinner color="secondary" size={30} />
-              </Box>
-            }>
-              <Auth />
-            </Suspense>
-          } />
-          <Route path="/" element={
-            <Suspense fallback={
-              <Box bg="main" width="-webkit-fill-available" height="-webkit-fill-available">
-                <Spinner color="secondary" size={30} />
-              </Box>
-            }>
-              <Home />
-            </Suspense>
-          } />
-          <Route path="/explore" element={
-            <Suspense fallback={
-              <Box bg="main" width="-webkit-fill-available" height="-webkit-fill-available">
-                <Spinner color="secondary" size={30} />
-              </Box>
-            }>
-              <Explore />
-            </Suspense>
-          } />
-          <Route path="/username/:username" element={
-            <Suspense fallback={
-              <Box bg="main" width="-webkit-fill-available" height="-webkit-fill-available">
-                <Spinner color="secondary" size={30} />
-              </Box>
-            }>
-              <User />
-            </Suspense>
-          } />
-          <Route path="/post/:postId" element={<>single post page</>} />
-          <Route path="/message" element={
-            <Suspense fallback={
-              <Box bg="main" width="-webkit-fill-available" height="-webkit-fill-available">
-                <Spinner color="secondary" size={30} />
-              </Box>
-            }>
-              <Message />
-            </Suspense>
-          } />
-          <Route path="*" element={
-            <Suspense fallback={
-              <Box bg="main" width="-webkit-fill-available" height="-webkit-fill-available">
-                <Spinner color="secondary" size={30} />
-              </Box>
-            }>
-              <NotFound />
-            </Suspense>
-          } />
-        </Routes>
-      </PageLayoutProvider>
-    </>
-  );
+	return (
+		<>
+			<PageLayoutProvider>
+				{location.pathname !== "/authentication" && <Sidebar />}
+				<Routes>
+					<Route path="/authentication" element={
+						<Suspense fallback={
+							<Box bg="main" width="-webkit-fill-available" height="-webkit-fill-available">
+								<Spinner color="secondary" size={30} />
+							</Box>
+						}>
+							<Auth />
+						</Suspense>
+					} />
+					<Route path="/" element={
+						<Suspense fallback={
+							<Box bg="main" width="-webkit-fill-available" height="-webkit-fill-available">
+								<Spinner color="secondary" size={30} />
+							</Box>
+						}>
+							<Home />
+						</Suspense>
+					} />
+					<Route path="/explore" element={
+						<Suspense fallback={
+							<Box bg="main" width="-webkit-fill-available" height="-webkit-fill-available">
+								<Spinner color="secondary" size={30} />
+							</Box>
+						}>
+							<Explore />
+						</Suspense>
+					} />
+					<Route path="/username/:username" element={
+						<Suspense fallback={
+							<Box bg="main" width="-webkit-fill-available" height="-webkit-fill-available">
+								<Spinner color="secondary" size={30} />
+							</Box>
+						}>
+							<User />
+						</Suspense>
+					} />
+					<Route path="/post/:postId" element={<>single post page</>} />
+					<Route path="/message" element={
+						<Suspense fallback={
+							<Box bg="main" width="-webkit-fill-available" height="-webkit-fill-available">
+								<Spinner color="secondary" size={30} />
+							</Box>
+						}>
+							<Message />
+						</Suspense>
+					} />
+					<Route path="*" element={
+						<Suspense fallback={
+							<Box bg="main" width="-webkit-fill-available" height="-webkit-fill-available">
+								<Spinner color="secondary" size={30} />
+							</Box>
+						}>
+							<NotFound />
+						</Suspense>
+					} />
+				</Routes>
+			</PageLayoutProvider>
+		</>
+	);
 };
 
 export default EntryComponent;

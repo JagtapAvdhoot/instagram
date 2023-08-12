@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 // TODO: this is not working
+// TODO: no need of this model
 // TODO: changes require
 const postSchema = new Schema(
   {

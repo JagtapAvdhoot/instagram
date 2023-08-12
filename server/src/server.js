@@ -13,7 +13,7 @@ app.use(helmet());
 app.use(helmet.hidePoweredBy());
 app.use(express.json({ extended: true, limit: "50MB" }));
 app.use(express.urlencoded({ extended: false }));
-app.use(morgan("dev"));
+app.use(morgan("common"));
 app.use(
   cors({
     origin: process.env.CLIENT_URL,

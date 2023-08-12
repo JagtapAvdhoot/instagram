@@ -6,9 +6,9 @@ const backendUrl =
 const cancelToken = axios.CancelToken.source();
 
 const requestServer = axios.create({
-  baseURL: backendUrl,
-  withCredentials: true,
-  cancelToken: cancelToken.token,
+	baseURL: backendUrl,
+	withCredentials: true,
+	cancelToken: cancelToken.token,
 });
 
 export default requestServer;
