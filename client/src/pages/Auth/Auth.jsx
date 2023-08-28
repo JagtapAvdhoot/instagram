@@ -5,29 +5,17 @@ import { Box, Center, Flex, Link, Text } from "@chakra-ui/react";
 import InstagramLogo from "../../components/InstagramLogo/InstagramLogo";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
-import { themeSelector, tokenSelector, useAuthStore, useGlobalStore } from "../../app/store";
-import { useQuery } from "@tanstack/react-query";
-import { signedUserKey } from "../../react-query";
-import { getSignedUser } from "../../services/user.service";
+import { themeSelector, useGlobalStore } from "../../app/store";
 
 const Auth = () => {
 	const [isSignInActive, setIsSignInActive] = useState(false);
 
-	const navigate = useNavigate();
-	const location = useLocation();
-	const token = useAuthStore(tokenSelector);
 	const theme = useGlobalStore(themeSelector);
 
 	const handleAuthChange = useCallback(
 		() => setIsSignInActive(!isSignInActive),
 		[isSignInActive]
 	);
-
-	useEffect(() => {
-		if (token !== null) {
-			navigate("/", { replace: true });
-		}
-	}, [location.pathname, token]);
 
 	return (
 		<>

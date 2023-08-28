@@ -218,7 +218,6 @@ const getSuggestedUsers = asyncHandler(async (req, res) => {
   if (suggestedUsers.length === 0) {
     suggestedUsers = await User.find().select("_id username avatar")
   }
-  console.log('user.controller.js:209', suggestedUsers);
   sendSuccessResponse({ res, data: { users: suggestedUsers } });
 });
 

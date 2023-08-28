@@ -26,7 +26,7 @@ const ModalHeaderNextComponent = memo(({ toggleModalState }) => {
 	const { mutate: createPostFunction, isLoading: createPostLoading } = useMutation({
 		mutationKey: [createPostKey],
 		mutationFn: (body) => createPost(body),
-		onSettled: (data) => {
+		onSettled: () => {
 			queryClient.invalidateQueries([homeFeedKey]);
 			toggleModalState();
 			clearModal();

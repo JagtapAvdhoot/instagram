@@ -19,10 +19,10 @@ const PostFooterIcons = memo(() => {
 	const signedUser = useAuthStore(signedUserSelector);
 
 	const hasLiked = contextValues?.postLikes.findIndex(
-		(pst) => pst.user === signedUser._id
+		(pst) => pst.user === signedUser?._id
 	);
 	const hasBookmark = contextValues?.postSaves.findIndex(
-		(pst) => pst.user === signedUser._id
+		(pst) => pst.user === signedUser?._id
 	);
 
 	const queryClient = useQueryClient();
@@ -41,7 +41,7 @@ const PostFooterIcons = memo(() => {
 		},
 		onMutate: () => {
 			if (hasLiked === -1) {
-				contextValues.postLikes.push({ user: signedUser._id });
+				contextValues.postLikes.push({ user: signedUser?._id });
 			} else {
 				contextValues.postLikes.splice(hasLiked, 1);
 			}
@@ -62,7 +62,7 @@ const PostFooterIcons = memo(() => {
 		},
 		onMutate: () => {
 			if (hasBookmark === -1) {
-				contextValues.postSaves.push({ user: signedUser._id });
+				contextValues.postSaves.push({ user: signedUser?._id });
 			} else {
 				contextValues.postSaves.splice(hasBookmark, 1);
 			}

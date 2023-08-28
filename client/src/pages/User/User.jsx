@@ -26,15 +26,16 @@ import { RiSettings3Fill } from "react-icons/ri";
 import { LiaBookmarkSolid, LiaUserTagSolid } from "react-icons/lia";
 import { useQuery } from "@tanstack/react-query";
 
+import { getUserProfile } from "../../services/user.service";
+import { userPageKey } from "../../react-query";
+import { signedUserSelector, useAuthStore } from "../../app/store";
+import PostProvider from "../../contexts/PostContext";
+import Post from "../../components/Post/Post";
+
 const MiniModal = lazy(() => import("../../components/MiniModal/MiniModal"));
 const PageLayout = lazy(() => import("../../Layout/PageLayout"))
 const GridPostRender = lazy(() => import("../../components/GridPostRender/GridPostRender"))
 const ScrollWrapper = lazy(() => import("../../components/ScrollWrapper/ScrollWrapper"))
-const { getUserProfile } from "../../services/user.service";
-const { userPageKey } from "../../react-query";
-const { signedUserSelector, useAuthStore } from "../../app/store";
-const PostProvider from "../../contexts/PostContext";
-const Post from "../../components/Post/Post";
 
 const User = () => {
 	const { username } = useParams();

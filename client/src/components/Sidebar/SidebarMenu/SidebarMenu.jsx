@@ -8,40 +8,39 @@ import { sidebarWidthSelector, useGlobalStore } from "../../../app/store";
 import SidebarMenuList from "../SidebarMenuList/SidebarMenuList";
 
 const SidebarMenu = memo(() => {
-	const { isLargerThan900 } = useContext(PageLayoutContext);
+  const { isLargerThan900 } = useContext(PageLayoutContext);
 
-	const sideBarWidth = useGlobalStore(sidebarWidthSelector);
+  const sideBarWidth = useGlobalStore(sidebarWidthSelector);
 
-	const isSidebarFull = sideBarWidth ? false : isLargerThan900 ? true : false;
-	return (
-		<>
-			<Menu placement="right-end">
-				<MenuButton
-					color="secondary"
-					as={Button}
-					_hover={{ bg: "hover", transform: "scale(1.05)" }}
-					_active={{ bg: "hover", transform: "scale(1.05)" }}
-					leftIcon={<RiMenuFill />}
-					fontSize="2xl"
-					iconSpacing={isSidebarFull ? "2" : "0"}
-					marginTop="auto"
-					variant="ghost"
-					justifyContent='flex-start'
-					width="90%"
-          
-					marginX="3"
-				>
-					{isSidebarFull ? (
-						<Text fontSize="lg" textAlign='start' fontWeight="light" >
+  const isSidebarFull = sideBarWidth ? false : isLargerThan900 ? true : false;
+  return (
+    <>
+      <Menu placement="right-end">
+        <MenuButton
+          color="secondary"
+          as={Button}
+          _hover={{ bg: "hover", transform: "scale(1.05)" }}
+          _active={{ bg: "hover", transform: "scale(1.05)" }}
+          leftIcon={<RiMenuFill />}
+          fontSize="2xl"
+          iconSpacing={isSidebarFull ? "2" : "0"}
+          marginTop="auto"
+          variant="ghost"
+          justifyContent="flex-start"
+          width="90%"
+          marginX="3"
+        >
+          {isSidebarFull ? (
+            <Text fontSize="lg" textAlign="start" fontWeight="light">
               Menu
-						</Text>
-					) : null}
-				</MenuButton>
+            </Text>
+          ) : null}
+        </MenuButton>
 
-				<SidebarMenuList />
-			</Menu>
-		</>
-	);
+        <SidebarMenuList />
+      </Menu>
+    </>
+  );
 });
 
 export default SidebarMenu;

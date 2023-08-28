@@ -15,21 +15,7 @@ export const queryClient = new QueryClient({
 			refetchOnMount:false,
 			refetchOnReconnect:false,
 		},
-	},
-	logger: {
-		log: (...args) => {
-			// Log debugging information
-			console.log(...args);
-		},
-		warn: (...args) => {
-			// Log warning
-			console.warn(...args);
-		},
-		error: (...args) => {
-			// Log error
-			console.error(...args);
-		},
-	},
+	}
 });
 
 // query constants

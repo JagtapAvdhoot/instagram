@@ -27,7 +27,6 @@ if (process.env.NODE_ENV === "production") {
   app.use(compression());
 }
 
-
 app.use("/api", router);
 
 app.get("/", (req, res) => {
