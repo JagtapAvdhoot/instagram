@@ -1,26 +1,9 @@
-import React, { useEffect, useState } from "react";
-import io from "socket.io-client";
+import { useEffect, useState } from "react";
 
 const useSocket = () => {
 	const [socketInstance, setSocketInstance] = useState(null);
 
-	useEffect(() => {
-		let socket;
-		if (!socketInstance) {
-			socket = io(import.meta.env.VITE_SERVER_URL);
-			setSocketInstance(socket);
-		}
-
-		return () => {
-			if (socketInstance) {
-				socket.disconnect();
-			}
-		};
-	}, []);
-
-	return {
-		socketInstance,
-	};
+	// TODO: custom logic with ws here in future
 };
 
 export default useSocket;

@@ -1,13 +1,12 @@
 const moment = require("moment");
-const { Types, Schema } = require("mongoose");
+const { Types} = require("mongoose");
 const async = require("async");
 const _ = require("lodash");
-const { Faker, es, faker } = require("@faker-js/faker");
+const { faker } = require("@faker-js/faker");
 const axios = require("axios");
 const path = require("path");
 const fs = require("fs");
 
-const filters = require("../templates/filter.json");
 const Post = require("../models/post.model");
 const User = require("../models/user.model");
 const asyncHandler = require("../middlewares/asyncHandler");
@@ -20,7 +19,7 @@ const createError = require("../middlewares/createError");
 
 exports.seedPosts = asyncHandler(async (req, res) => {
   const post = (link) => ({
-    description: faker.lorem.paragraphs(4,'\n'),
+    description: faker.lorem.paragraphs(4, "\n"),
     hideComments: Boolean(Math.round(Math.random())),
     hideStats: Boolean(Math.round(Math.random())),
     isPinned: false,
@@ -75,7 +74,7 @@ exports.createPost = asyncHandler(async (req, res) => {
   const signedUser = req.user;
   const { media, hideComments, location, hideStats, tags, description } =
     req.body;
-  const socket = req.app.get("socketIo");
+  // const socket = req.app.get("socketIo");
   let newPost, finalPost;
 
   newPost = new Post({
@@ -153,7 +152,7 @@ exports.removeMedia = asyncHandler(async (req, res) => {
 exports.savePost = asyncHandler(async (req, res) => {
   const { pid: postId } = req.query;
   const { id: userId } = req.user;
-  const socket = req.app.get("socketIo");
+  // const socket = req.app.get("socketIo");
 
   const requestedPost = await Post.exists({ _id: postId });
 
@@ -238,8 +237,8 @@ exports.removePost = asyncHandler(async (req, res) => {
 
 exports.updatePost = asyncHandler(async (req, res) => {
   // description hashtags tags
-  const { } = req.body;
-  const { } = req.query;
+  const {} = req.body;
+  const {} = req.query;
 
   // post updates
 });
@@ -297,10 +296,13 @@ exports.likePost = asyncHandler(async (req, res) => {
 exports.pinPost = asyncHandler(async (req, res) => {
   const { pid } = req.query;
 
-  const pinUpdate = await Post.updateOne({ _id: pid }, { $set: { pin: { isPin: true, time: Date.now() } } })
+  const pinUpdate = await Post.updateOne(
+    { _id: pid },
+    { $set: { pin: { isPin: true, time: Date.now() } } }
+  );
 
   if (pinUpdate.modifiedCount === 0) {
-    await Post.updateOne({ _id: pid }, { $set: { pin: { isPin: false } } })
+    await Post.updateOne({ _id: pid }, { $set: { pin: { isPin: false } } });
   }
 
   sendSuccessResponse({ res });
@@ -312,7 +314,7 @@ exports.getFeed = asyncHandler(async (req, res) => {
   const limit = Number(lmt) || 10;
   const offset = Number(off) * limit || 0;
   const obSignedUserId = new Types.ObjectId(signedUser._id);
-  const rootUserId = new Types.ObjectId('64bd7cfc75067b0d7f2bceaa');
+  const rootUserId = new Types.ObjectId("64bd7cfc75067b0d7f2bceaa");
 
   const user = await User.findById(signedUser._id, "followingUsers");
 
@@ -400,4 +402,3 @@ exports.getExplore = asyncHandler(async (req, res) => {
 
   sendSuccessResponse({ res, data: { posts, total: postCount } });
 });
-

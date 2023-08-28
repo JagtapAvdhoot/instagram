@@ -11,7 +11,6 @@ const {
   removeMedia,
   getFeed,
   getExplore,
-  sharePost,
   seedPosts,
   getFilters,
 } = require("../controllers/post.controller");
